@@ -8,17 +8,16 @@ public class RedFrogController : MonoBehaviour
     public GameObject fireball;
     public float waitToShoot = 2.0f;
 
-    void Start()
-    {
-        StartCoroutine(WaitAndShootFireball());
-    }
+    float secondsPassed = 0;
 
-    private IEnumerator WaitAndShootFireball()
+    void Update()
     {
-        while (true)
+        secondsPassed += Time.deltaTime;
+
+        if (secondsPassed >= waitToShoot)
         {
-            yield return new WaitForSeconds(waitToShoot);
             Instantiate(fireball, this.transform.position, Quaternion.identity);
+            secondsPassed = 0;
         }
     }
 }
