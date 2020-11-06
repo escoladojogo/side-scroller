@@ -8,6 +8,7 @@ public class FrogController : MonoBehaviour
     public float waitToJump = 5.0f;
     public Rigidbody2D rigidBody;
     public Animator animator;
+    public GameObject jumpListener;
 
     float secondsPassed = 0;
 
@@ -20,16 +21,16 @@ public class FrogController : MonoBehaviour
             animator.SetBool("IsJumping", true);
             rigidBody.AddForce(new Vector2(0, jumpForce));
             secondsPassed = 0;
+
+            if (jumpListener != null)
+            {
+                jumpListener.SendMessage("Jumped");
+            }
         }
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         animator.SetBool("IsJumping", false);
-    }
-
-    public bool HasJumped()
-    {
-        return animator.GetBool("IsJumping") && secondsPassed == 0;
     }
 }

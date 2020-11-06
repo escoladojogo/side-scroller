@@ -19,28 +19,25 @@ public class BlueFrogController : MonoBehaviour
         player = GameObject.FindWithTag("Player");
     }
 
-    void Update()
+    void Jumped()
     {
-        if (frogController.HasJumped())
+        float xForce = 0;
+
+        if (enemyTools.IsPlayerClose(transform.position.x))
         {
-            float xForce = 0;
-
-            if (enemyTools.IsPlayerClose(transform.position.x))
+            if (enemyTools.IsPlayerLeft(transform.position.x))
             {
-                if (enemyTools.IsPlayerLeft(transform.position.x))
-                {
-                    xForce = -xJumpForce;
-                    spriteRenderer.flipX = false;
-                }
-                else
-                {
-                    xForce = xJumpForce;
-                    spriteRenderer.flipX = true;
-                }
+                xForce = -xJumpForce;
+                spriteRenderer.flipX = false;
             }
-
-            frogController.rigidBody.AddForce(new Vector2(xForce, 0));
+            else
+            {
+                xForce = xJumpForce;
+                spriteRenderer.flipX = true;
+            }
         }
+
+        frogController.rigidBody.AddForce(new Vector2(xForce, 0));
     }
 
     public void Die()

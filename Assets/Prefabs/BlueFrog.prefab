@@ -168,6 +168,7 @@ MonoBehaviour:
   waitToJump: 5
   rigidBody: {fileID: 3182415066842726041}
   animator: {fileID: 3182415066842726039}
+  jumpListener: {fileID: 3182415066842726044}
 --- !u!114 &3182415066842726038
 MonoBehaviour:
   m_ObjectHideFlags: 0
