@@ -173,7 +173,7 @@ public class PlayerController : MonoBehaviour
             jump = true;
             animator.SetBool("IsJumping", true);
 
-            collision.gameObject.SendMessage("Die");
+            collision.gameObject.SendMessage("Die", gameObject);
         }
         else if (collision.gameObject.tag == "Stairs")
         {

@@ -7,14 +7,7 @@ public class DeathController : MonoBehaviour
     public GameObject explosion;
     public int score;
 
-    GameObject player;
-
-    private void Start()
-    {
-        player = GameObject.FindWithTag("Player");
-    }
-
-    void Die()
+    void Die(GameObject player)
     {
         player.SendMessage("AddScore", score);
         Instantiate(explosion, this.transform.position, Quaternion.identity);
