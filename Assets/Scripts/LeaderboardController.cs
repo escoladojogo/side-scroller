@@ -15,18 +15,6 @@ public class LeaderboardController : MonoBehaviour
     string[] names = new string[3];
     int[] scores;
 
-    private void OnEnable()
-    {
-        StartCoroutine(WaitAndGoNextStage());
-    }
-
-    IEnumerator WaitAndGoNextStage()
-    {
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        yield return new WaitForSeconds(3.0f);
-        player.SendMessage("GoToNextStage");
-    }
-
     void InitializeScores(string level)
     {
         scores = new int[3];

@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour
     {
         leaderboardUI.AddScore(SceneManager.GetActiveScene().name, leaderboardName.text, score);
         inputNameUI.SetActive(false);
-        leaderboardUI.gameObject.SetActive(true);
+        StartCoroutine(ShowLeaderboardAndGoToNextStage());
     }
 
     void EndLevel()
@@ -266,8 +266,15 @@ public class PlayerController : MonoBehaviour
         else
         {
             gameUI.SetActive(false);
-            leaderboardUI.gameObject.SetActive(true);
+            StartCoroutine(ShowLeaderboardAndGoToNextStage());
         }
+    }
+
+    IEnumerator ShowLeaderboardAndGoToNextStage()
+    {
+        leaderboardUI.gameObject.SetActive(true);
+        yield return new WaitForSeconds(3.0f);
+        GoToNextStage();
     }
 
     void GoToNextStage()
