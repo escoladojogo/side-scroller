@@ -31,44 +31,31 @@ public class LeaderboardController : MonoBehaviour
         if (scores == null)
         {
             InitializeScores(level);
+        }
+
+        if (score > scores[scores.Length - 1])
+        {
             return true;
         }
-
-        for (int i = 0; i < scores.Length; i++)
-        {
-            if (score > scores[i])
-            {
-                return true;
-            }
-        }
-
         return false;
     }
 
     public void AddScore(string level, string name, int score)
     {
-        int newScorePos = -1;
-
-        for (int i = 0; i < scores.Length; i++)
+        for (int i = scores.Length - 1; i >= 0; i--)
         {
-            if (score > scores[i])
+            if (i > 0 && scores[i - 1] < score)
             {
-                newScorePos = i;
+                names[i] = names[i - 1];
+                scores[i] = scores[i - 1];
+            }
+            else
+            {
+                names[i] = name;
+                scores[i] = score;
                 break;
             }
         }
-
-        if (newScorePos == -1)
-            return;
-
-        for (int i = scores.Length - 1; i > newScorePos; i--)
-        {
-            names[i] = names[i - 1];
-            scores[i] = scores[i - 1];
-        }
-
-        names[newScorePos] = name;
-        scores[newScorePos] = score;
 
         if (scores[0] != -1)
         {
