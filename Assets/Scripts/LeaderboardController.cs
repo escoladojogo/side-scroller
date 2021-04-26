@@ -19,10 +19,34 @@ public class LeaderboardController : MonoBehaviour
     {
         scores = new int[3];
 
-        for (int i = 0; i < 3; i++)
+        if (PlayerPrefs.HasKey(level + "score0"))
         {
-            scores[i] = PlayerPrefs.GetInt(level + "score" + i, -1);
-            names[i] = PlayerPrefs.GetString(level + "name" + i, null);
+            for (int i = 0; i < 3; i++)
+            {
+                scores[i] = PlayerPrefs.GetInt(level + "score" + i);
+                names[i] = PlayerPrefs.GetString(level + "name" + i);
+            }
+
+            score1.text = scores[0].ToString();
+            score2.text = scores[1].ToString();
+            score3.text = scores[2].ToString();
+            name1.text = names[0];
+            name2.text = names[1];
+            name3.text = names[2];
+        }
+        else
+        {
+            int score = 30;
+
+            for (int i = 0; i < 3; i++)
+            {
+                scores[i] = score;
+                score = score - 10;
+            }
+
+            names[0] = name1.text;
+            names[1] = name2.text;
+            names[2] = name3.text;
         }
     }
 
